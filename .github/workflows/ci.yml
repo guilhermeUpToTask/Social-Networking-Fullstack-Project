@@ -91,6 +91,7 @@ jobs:
 
       # Install the necesseraries browers for playwright to exec
       - name: Install Playwright Browsers
+        working-directory: frontend    
         run: npx playwright install --with-deps
 
       # Run end-to-end tests with Playwright.
