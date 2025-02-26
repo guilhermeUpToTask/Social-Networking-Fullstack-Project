@@ -28,6 +28,7 @@ jobs:
     
       # Install the necessaries dependencies
       - name: Install dependencies
+        working-directory: frontend
         run: npm install
 
       # Build the frontend assets
