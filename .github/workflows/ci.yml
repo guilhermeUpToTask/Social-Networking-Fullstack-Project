@@ -102,4 +102,4 @@ jobs:
 
       # Tear down all running containers after tests complete
       - name: Tear Down Services
-        run: docker-compose down
+        run: docker compose down
