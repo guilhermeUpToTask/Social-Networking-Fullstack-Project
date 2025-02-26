@@ -20,6 +20,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Build the frontend assets
+      - name: Build Frontend
+        working-directory: frontend
+        run: |
+          npm install
+          npm run build
+
       # Set up Docker Buildx (optional, but useful for multi-arch builds)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -47,9 +54,32 @@ jobs:
       - name: Run Backend Tests
         run: docker compose exec backend pytest --maxfail=1 --disable-warnings -q
 
+      # Wait for nginx (serving your frontend) to be ready
+      - name: Wait for Nginx to be Ready
+        run: |
+          echo "Waiting for Nginx to be ready..."
+          for i in {1..10}; do
+            if curl -s http://localhost:80 | grep -q "<html"; then
+              echo "Nginx is ready!"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Nginx did not become ready in time."
+          exit 1
+
+      # Run a simple test to ensure that the frontend is being served by nginx
+      - name: Test Frontend Served by Nginx
+        run: |
+          response=$(curl -s http://localhost:80)
+          if echo "$response" | grep -q "<html"; then
+            echo "Frontend is served correctly!"
+          else
+            echo "Frontend is not served correctly."
+            exit 1
+          fi
+
       # Run end-to-end tests with Playwright.
-      # This example assumes you have a package.json script named "test:e2e"
-      # and that your e2e tests can run from the host environment against your live Docker services.
       - name: Set up Node.js for E2E Tests
         uses: actions/setup-node@v3
         with:
