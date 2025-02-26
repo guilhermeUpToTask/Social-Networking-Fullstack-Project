@@ -9,7 +9,7 @@
     "lint": "biome check --apply-unsafe --no-errors-on-unmatched --files-ignore-unknown=true ./",
     "preview": "vite preview",
     "generate-client": "openapi-ts",
-    "test:e2e": "npx playwright test --project=chromium --headless"
+    "test:e2e": "npx playwright test"
   },
   "dependencies": {
     "@chakra-ui/icons": "2.1.1",
