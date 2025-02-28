@@ -38,3 +38,5 @@ class UsersPublic(SQLModel):
     data:list[UserPublic]
     count: int
 
+class Message (SQLModel):
+    message: str
