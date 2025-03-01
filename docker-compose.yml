@@ -21,6 +21,8 @@ services:
     image: tasksmaneger_backend:latest
     build: ./backend/
     environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - ALGORITHM=${ALGORITHM}
       - PROJECT_NAME=${PROJECT_NAME}
       - DATABASE_USERNAME=${DATABASE_USERNAME}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
@@ -46,6 +48,8 @@ services:
         restart: true
     command: bash scripts/pre_start.sh
     environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - ALGORITHM=${ALGORITHM}
       - PROJECT_NAME=${PROJECT_NAME}
       - DATABASE_USERNAME=${DATABASE_USERNAME}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
