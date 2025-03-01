@@ -23,6 +23,7 @@ from app.core.config import settings # noqa
 from sqlmodel import SQLModel
 from app.models.category import Category
 from app.models.task import Task
+from app.models.user import User
 
 # Target metadata for Alembic
 target_metadata = SQLModel.metadata
