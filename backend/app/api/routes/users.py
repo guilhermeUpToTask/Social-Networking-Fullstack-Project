@@ -94,6 +94,8 @@ def delete_user_me(session:SessionDep, current_user:CurrentUser) -> Any:
     session.commit()
     return Message(message="user deleted successfully")
 
+
+#Should not return the user uuid
 @router.post("/sign_up", response_model=UserPublic)
 def register_user(session: SessionDep, user_in: UserRegister) -> Any:
     """
