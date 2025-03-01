@@ -21,14 +21,14 @@ services:
     image: tasksmaneger_backend:latest
     build: ./backend/
     environment:
-      - SECRET_KEY=${SECRET_KEY}
-      - ALGORITHM=${ALGORITHM}
       - PROJECT_NAME=${PROJECT_NAME}
       - DATABASE_USERNAME=${DATABASE_USERNAME}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - DATABASE_HOST=db  # ← This is the critical fix
       - DATABASE_NAME=${DATABASE_NAME}
       - DATABASE_PORT=${DATABASE_PORT}
+      - SECRET_KEY=${SECRET_KEY}
+      - ALGORITHM=${ALGORITHM}
     ports:
       - "8000:8000"
     depends_on:
