@@ -28,6 +28,7 @@ class UpdatePassword(SQLModel):
     new_password: str = Field(min_length=8, max_length=40)
 
 class User(UserBase, table=True):
+    __tablename__ = "user"
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     hashed_password: str
 
@@ -40,3 +41,15 @@ class UsersPublic(SQLModel):
 
 class Message (SQLModel):
     message: str
+    
+class TokenPayload(SQLModel):
+    sub: str | None = None
+    
+class Token(SQLModel):
+    access_token: str
+    token_type: str = "bearer"
+
+class NewPassword(SQLModel):
+    token: str
+    new_password: str = Field(min_length=8, max_length=40)
+    
